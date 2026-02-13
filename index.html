@@ -90,3 +90,35 @@
             document.getElementById("sColor").style.color = colorHex;
             document.getElementById("sNum").innerText = "Number: " + num;
         }
+
+// সময় মিলানোর ম্যাজিক কোড (গেমের সাথে মিল থাকবে)
+        setInterval(function() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const timeLeft = 60 - seconds; 
+            document.getElementById("timerDisplay").innerText = "Time Left: 00:" + (timeLeft < 10 ? "0" + timeLeft : timeLeft);
+        }, 1000);
+
+        // ড্র্যাগিং সিস্টেম
+        var box = document.getElementById("bossBox");
+        var active = false, currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+        function dragStart(e) {
+            initialX = (e.type === "touchstart" ? e.touches[0].clientX : e.clientX) - xOffset;
+            initialY = (e.type === "touchstart" ? e.touches[0].clientY : e.clientY) - yOffset;
+            if (e.target.tagName !== "INPUT" && e.target.tagName !== "BUTTON") active = true;
+        }
+        function drag(e) {
+            if (active) {
+                e.preventDefault();
+                currentX = (e.type === "touchmove" ? e.touches[0].clientX : e.clientX) - initialX;
+                currentY = (e.type === "touchmove" ? e.touches[0].clientY : e.clientY) - initialY;
+                xOffset = currentX; yOffset = currentY;
+                box.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+            }
+        }
+        document.addEventListener("touchstart", dragStart, false);
+        document.addEventListener("touchmove", drag, { passive: false });
+        document.addEventListener("touchend", () => active = false, false);
+    </script>
+</body>
+</html>

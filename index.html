@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DK WIN - ABU BAKAR BOSS</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background: #000; }
+        #site-frame { width: 100%; height: 100%; border: none; }
+
+        #bossBox { 
+            position: fixed; top: 120px; left: 20px;
+            width: 170px; background: linear-gradient(145deg, #1a1a1a, #000); 
+            border: 2px solid #f7d300; border-radius: 15px; 
+            padding: 12px; color: #fff; text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 999999;
+            touch-action: none; cursor: move;
+        }
+
+        .b-title { color: #f7d300; font-size: 10px; font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
+        
+        #sigArea { display: none; }
+        .sig-val { font-size: 24px; font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .color-text { font-size: 14px; font-weight: bold; margin: 4px 0; display: block; }
+        .sig-num { font-size: 13px; color: #f7d300; font-weight: bold; margin-bottom: 10px; }
+        
+        .h-input { background: #222; color: #fff; border: 1px solid #444; border-radius: 5px; padding: 8px; width: 90%; margin-bottom: 10px; text-align: center; }
+        
+        .h-btn { 
+            background: linear-gradient(to bottom, #f7d300, #b89d00); 
+            color: black; padding: 10px; border-radius: 8px; border: none; 
+            width: 100%; font-weight: bold; font-size: 14px; cursor: pointer;
+            box-shadow: 0 4px #8a7600;
+        }
+
+        .timer { font-size: 12px; color: #f7d300; margin-top: 10px; border-top: 1px solid #333; padding-top: 8px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <iframe id="site-frame" src="https://dkwin10.com/#/register?invitationCode=27876108513"></iframe>
+
+    <div id="bossBox">
+        <div class="b-title">ABU BAKAR BOSS</div>
+        
+        <div id="sigArea">
+            <div id="sType" class="sig-val">BIG</div>
+            <div id="sColor" class="color-text">RED</div>
+            <div id="sNum" class="sig-num">Number: 5</div>
+        </div>
+
+        <div id="loginArea">
+            <input type="text" id="pInput" class="h-input" placeholder="Password">
+        </div>
+
+        <button id="mainBtn" class="h-btn" onclick="handleAction()">GET SIGNAL</button>
+        
+        <div class="timer" id="timerDisplay">Time Left: 00:00</div>
+    </div>
+
+    <script>
+        let isLoggedIn = false;
+
+        function handleAction() {
+            if (!isLoggedIn) {
+                if (document.getElementById("pInput").value === "ABUBAKAR") {
+                    isLoggedIn = true;
+                    document.getElementById("loginArea").style.display = "none";
+                    document.getElementById("sigArea").style.display = "block";
+                    document.getElementById("mainBtn").innerText = "NEXT";
+                    generateSignal();
+                } else { alert("ভুল পাসওয়ার্ড!"); }
+            } else { generateSignal(); }
+        }
+
+        function generateSignal() {
+            const num = Math.floor(Math.random() * 10);
+            let type = (num >= 5) ? "BIG" : "SMALL";
+            let color = "";
+            let colorHex = "";
+
+            if (num === 0) { color = "RED + VIOLET"; colorHex = "#ff4444"; }
+            else if (num === 5) { color = "GREEN + VIOLET"; colorHex = "#00ff00"; }
+            else if ([1,3,7,9].includes(num)) { color = "GREEN"; colorHex = "#00ff00"; }
+            else { color = "RED"; colorHex = "#ff4444"; }
+
+            document.getElementById("sType").innerText = type;
+            document.getElementById("sType").style.color = colorHex;
+            document.getElementById("sColor").innerText = color;
+            document.getElementById("sColor").style.color = colorHex;
+            document.getElementById("sNum").innerText = "Number: " + num;
+        }
